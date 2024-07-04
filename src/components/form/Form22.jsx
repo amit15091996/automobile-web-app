@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TextField, Button, Grid, Typography, Paper } from "@mui/material";
+import jsPDF from "jspdf";
 
 const Form22 = () => {
   const [formData, setFormData] = useState({
@@ -16,9 +17,48 @@ const Form22 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., store data or generate PDF)
-    console.log("Form submitted:", formData);
-    // Add logic to store data or generate PDF here
+    generatePDF();
+  };
+
+  const generatePDF = () => {
+    // Initialize jsPDF instance
+    const pdf = new jsPDF();
+
+    // Set font size and style
+    pdf.setFontSize(12);
+    pdf.setFont("times", "normal");
+
+    // Define content for the PDF
+    const content = `
+      FORM 22
+
+      Engine Number: ${formData.engineNumber}
+      Chassis Number: ${formData.chassisNumber}
+      Model Number: ${formData.modelNumber}
+      Date: ${formData.date}
+    `;
+
+    // Add content to the PDF
+    pdf.text(content, 20, 20);
+
+    // Save the PDF (optional step)
+    // pdf.save("form22.pdf");
+
+    // Open print dialog
+    pdf.autoPrint();
+    pdf.output("dataurlnewwindow");
+
+    // Reset form after submission (optional)
+    setFormData({
+      engineNumber: "",
+      chassisNumber: "",
+      modelNumber: "",
+      date: "",
+    });
+  };
+
+  const handlePrint = () => {
+    generatePDF(); // Generate PDF again to open print dialog
   };
 
   return (
@@ -79,6 +119,14 @@ const Form22 = () => {
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary">
               Generate PDF
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handlePrint}
+              style={{ marginLeft: 10 }}
+            >
+              Print
             </Button>
           </Grid>
         </Grid>

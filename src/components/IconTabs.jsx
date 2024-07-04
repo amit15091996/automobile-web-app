@@ -17,14 +17,14 @@ const CenteredTabs = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-        <Avatar style={{ marginRight: '10px', backgroundColor: theme.palette.primary.main }}>
-          <CreditCardIcon style={{ color: theme.palette.getContrastText(theme.palette.primary.main) }} /> {/* Placeholder billing icon */}
-        </Avatar>
-        <Typography variant="h4" gutterBottom style={{ color: theme.palette.primary.main }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '-15px' }}>
+        {/* <Avatar style={{ marginRight: '10px', backgroundColor: theme.palette.primary.main }}>
+          <CreditCardIcon style={{ color: theme.palette.getContrastText(theme.palette.primary.main) }} />
+        </Avatar> */}
+        {/* <Typography variant="h4" gutterBottom style={{ color: theme.palette.primary.main }}>
           Automobile Web App
-        </Typography>
+        </Typography> */}
       </div>
       <Tabs
         value={value}

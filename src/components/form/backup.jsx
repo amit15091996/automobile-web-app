@@ -47,26 +47,21 @@ const Form21 = () => {
     // Define the content based on form data
     const content = `
       FORM 21 
-
       (See Rule 47 (a) & (d)) 
-
       SALE CERTIFICATE
-
       AUTHORESED DEALER IN BAJAJ AUTO LTD
       Shubham Auto
-
       (To be issued by manufacturer / dealer of offer of defence department (in case of auctioned) 
       vehicles) for presentation along with application for registration of a motor vehicle
                                                                                         ${formData.date}       
-      Certified that ................................................... ${formData.vehicleName} .....................
+      Certified that ................. ${formData.vehicleName}.....................
       has been delivered by us to 
-      Bearing invoice No................................................. ${formData.invoiceNo} ...................
-      Name of the buyer ................................................. ${formData.buyerName} ..................... 
-      Son/Wife/Daughter of .............................................. ${formData.relationship} .......................
+      Bearing invoice No....................${formData.invoiceNo} ...................
+      Name of the buyer .................${formData.buyerName}..................... 
+      Son/Wife/Daughter of .................${formData.relationship}.......................
       Address: ${formData.buyerAddress}
-      
       The vehicle is under agreement of hire/purchase/lease Hypothecation with
-      BERAR FINANCE LTD
+      ${formData.dealer}
   
       The Details of the vehicle are as below:
 
@@ -87,11 +82,14 @@ const Form21 = () => {
       15. Ac Fitted:                                                  :.....${formData.acFitted}.....
       16. Dealer:                                                     :.....${formData.dealer}.....
   
-      Trade Certificate:                                                                                FOR SHUBHAM AUTO 
-      CG23/T/16/GBD/2017          
-                                                                                                                      Authorized Signature                                  
-    `;
 
+
+
+      Trade Certificate:                                                   For SHUBHAM AUTO Authorised Store
+      CG23/T/16/GBD/2017          
+                                                                            Authorized Signature                                  
+    `;
+// ${formData.tradeCertificate}
     // Add the content to the PDF
     pdf.text(content, 40, 40);
 
@@ -99,73 +97,6 @@ const Form21 = () => {
     pdf.save("form21.pdf");
 
     // Reset form after submission (optional)
-    resetForm();
-  };
-
-  const handlePrint = () => {
-    // Generate PDF
-    const pdf = new jsPDF({ unit: "px", format: "a4" });
-    pdf.setFontSize(12);
-    pdf.setFont("times", "normal");
-
-    const content = `
-      FORM 21 
-
-      (See Rule 47 (a) & (d)) 
-
-      SALE CERTIFICATE
-
-      AUTHORESED DEALER IN BAJAJ AUTO LTD
-      Shubham Auto
-
-      (To be issued by manufacturer / dealer of offer of defence department (in case of auctioned) 
-      vehicles) for presentation along with application for registration of a motor vehicle
-                                                                                        ${formData.date}       
-      Certified that ................................................... ${formData.vehicleName} .....................
-      has been delivered by us to 
-      Bearing invoice No................................................. ${formData.invoiceNo} ...................
-      Name of the buyer ................................................. ${formData.buyerName} ..................... 
-      Son/Wife/Daughter of .............................................. ${formData.relationship} .......................
-      Address: ${formData.buyerAddress}
-      
-      The vehicle is under agreement of hire/purchase/lease Hypothecation with
-      BERAR FINANCE LTD
-  
-      The Details of the vehicle are as below:
-
-      1. Class of vehicle:                                            :.....${formData.classOfVehicle}.....
-      2. Maker's Name:                                                :.....${formData.makerName}.....
-      3. Chassis Number:                                              :.....${formData.chassisNumber}.....
-      4. Engine Number:                                               :.....${formData.engineNumber}.....
-      5. Horse Power / Cubic Capacity:                                :.....${formData.horsePower}.....
-      6. Fuel used:                                                   :.....${formData.fuelUsed}.....
-      7. No of Cylinders:                                             :.....${formData.cylinders}.....
-      8. Month & year of Mfg.:                                        :.....${formData.manufacturingDate}.....
-      9. Seat capacity (Including Driver):                            :.....${formData.seatCapacity}.....
-      10. Unladen weight:                                             :.....${formData.unladenWeight}.....
-      11. Colour/s Body:                                              :.....${formData.bodyColor}.....
-      12. Type of Body:                                               :.....${formData.bodyType}.....
-      13. Model Manufactured Location:                                :.....${formData.manufacturedLocation}.....
-      14. Gross vehicle weight (in kgs):                              :.....${formData.grossVehicleWeight}.....
-      15. Ac Fitted:                                                  :.....${formData.acFitted}.....
-      16. Dealer:                                                     :.....${formData.dealer}.....
-  
-      Trade Certificate:                                                                                FOR SHUBHAM AUTO 
-      CG23/T/16/GBD/2017          
-                                                                                                                      Authorized Signature                                  
-    `;
-
-    pdf.text(content, 40, 40);
-
-    // Open print dialog
-    pdf.autoPrint();
-    pdf.output("dataurlnewwindow");
-
-    // Reset form after print (optional)
-    resetForm();
-  };
-
-  const resetForm = () => {
     setFormData({
       date: "",
       certifiedThat: "",
@@ -201,7 +132,6 @@ const Form21 = () => {
         maxWidth: "800px",
         margin: "auto",
         marginTop: "20px",
-        backgroundColor:'#d8f3dc'
       }}
     >
       <Typography variant="h5" gutterBottom>
@@ -420,19 +350,11 @@ const Form21 = () => {
               onChange={handleChange}
             />
           </Grid>
-        </Grid>
-        <Grid item xs={12} style={{marginTop :'10px'}}>
-          <Button type="submit" variant="contained" color="primary">
-            Generate PDF
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handlePrint}
-            style={{ marginLeft: 10 }}
-          >
-            Print
-          </Button>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary">
+              Generate PDF
+            </Button>
+          </Grid>
         </Grid>
       </form>
     </Paper>

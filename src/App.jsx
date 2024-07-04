@@ -1,11 +1,11 @@
 // Inside index.js or App.js
-
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import IconTabs from './components/IconTabs';
+import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import IconTabs from "./components/IconTabs";
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: "Roboto, sans-serif",
   },
   // Customize other MUI components as needed
 });
@@ -13,7 +13,11 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ padding: '20px' }}>
+      <div
+        style={{
+          padding: "20px",
+        }}
+      >
         <IconTabs />
       </div>
     </ThemeProvider>
